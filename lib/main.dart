@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart'; // DIO 패키지로 HTTP 통신
 import 'dart:convert'; // JSON Encode, Decode를 위한 패키지
 import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // flutter_secure_storage 패키지
+import 'service.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,9 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Secure Storage',
-      home: LoginPage(),
-    );
+        title: 'Flutter Secure Storage',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LoginPage(),
+          '/service': (context) => ServicePage(),
+        });
   }
 }
 
@@ -50,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
 
     // user의 정보가 있다면 로그인 후 들어가는 첫 페이지로 넘어가게 합니다.
     if (userInfo != null) {
-      Navigator.pushNamed(context, '/main');
+      Navigator.pushNamed(context, '/service');
     } else {
       print('로그인이 필요합니다');
     }
@@ -61,11 +65,12 @@ class _LoginPageState extends State<LoginPage> {
     try {
       var dio = Dio();
       var param = {'account_name': '$accountName', 'password': '$password'};
-
-      Response response = await dio.post('로그인 API URL', data: param);
+      Response response =
+          await dio.post('https://dev.smartride.co.kr/test.php', data: param);
 
       if (response.statusCode == 200) {
-        final jsonBody = json.decode(response.data['user_id'].toString());
+        print(response.data['user_id'].toString());
+        final jsonBody = response.data['user_id'].toString();
         // 직렬화를 이용하여 데이터를 입출력하기 위해 model.dart에 Login 정의 참고
         var val = jsonEncode(Login('$accountName', '$password', '$jsonBody'));
 

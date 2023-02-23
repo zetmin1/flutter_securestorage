@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert'; // JSON Encode, Decode를 위한 패키지
 import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // flutter_secure_storage 패키지
 
 class ServicePage extends StatefulWidget {
@@ -42,7 +41,7 @@ class _ServicePageState extends State<ServicePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main'),
+        title: Text('Logout'),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
