@@ -1,4 +1,4 @@
-# flutter_securestorage2
+# flutter_securestorage
 
 A new Flutter project.
 
