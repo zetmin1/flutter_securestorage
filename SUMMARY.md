@@ -1,3 +1,3 @@
 # Table of contents
 
-* [SecureStorage를 이용한 각종 예제 모음](README.md)
+* [로그인/로그아웃 모드](README.md)
